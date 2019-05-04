@@ -1,6 +1,28 @@
 <link rel="stylesheet" href="../../node_modules/bootswatch/dist/cosmo/bootstrap.css">
 
 <style>
+    .inline-block-child {
+  display: inline-block;
+}
+
+.grid-container {
+  display: grid;
+   grid-template-columns: 60px 55% 50px;
+  grid-template-rows: 1fr;
+  grid-template-areas: "Album Detail Play" ;
+}
+
+.Detail { grid-area: Detail;
+ }
+
+.Play { grid-area: Play; 
+      vertical-align: middle;
+   text-align: center;
+}
+
+
+
+.Album { grid-area: Album; }
     body {
         font-family: system, -apple-system, '.SFNSText-Regular', 'SF UI Text', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
         color:black;
@@ -9,32 +31,69 @@
         text-align: center;
         /* font-size: 40px; */
     }
+    h5 {
+        color: azure;
+        margin: 0;
+        white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+    }
+
+      h6 {
+        color:rgb(214, 214, 214);
+        margin: 0;
+        white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+    }
+    
+    #currsong {
+        text-align: left;
+    }
     .invert {
             filter: invert(100%) ;
     }
+     .cover-container {
+    margin: 0 auto;
+    width: 100%;
+    padding: 0px;
+}
+.tile, .info {
+    float:left;
+}
 
     #rcorners1 {
   /* border-radius: 25px; */
-  background:rgba(34, 34, 34, 0.6);
+  background:rgba(34, 34, 34, .4);
   /* padding: 20px;  */
   width: 100%;
-opacity: .8;
+opacity: 1;
   height: 50px; 
-     position:relative;
+          float: right;
+text-align: left;
+
+
+     /* position:relative; */
 
 }
 
 .im{
-     position:absolute;
-    top: 0;  
-    bottom: 0;  
-    left: 0;  
-    right: 0;  
-    margin: auto;
-
+     position: relative;
+   top: 50%;
+   left: 50%;
+   width: 30px;
+   height: 30px;
+   margin-top: -15px; /* Half the height */
+   margin-left: -15px; /* Half the width */
+   
 }
 
-    h2 {
+#album{
+    margin: 0px;
+
+
+}
+  h2 {
         padding: 0;
         margin: 0;
         position: absolute;
@@ -43,16 +102,6 @@ opacity: .8;
         transform: translate(-50%, -50%);
     }
 
-    #close {
-        color: white;
-        opacity: 0.7;
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 12px;
-        text-decoration: none;
-    }
 </style>
     <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
 
@@ -79,36 +128,41 @@ opacity: .8;
 <div style="height:10px"></div>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-5">
-          <div class="row">
-                <div class="col-md-12" id="currshow">
+    <div class="center">
+   
+                <div id="currshow">
                 </div>
-            </div>
-            <div class="row"></div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="message-card" >
-                        </div>
-                       
 
-
-                        </div>
-                        
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-      
+              
+       
+         
      
     </div>
 </div>
 <div class="fixed-bottom">
-<div align="center ">
-    <div id="rcorners1" class="center">
-        <a href="#" id="audioControl"><img class="img-fluid im invert" src="https://www.pngarts.com/files/2/Play-Button-PNG-Picture.png" width="30" height="30"></a>
+<div >
+    
+    <div id="rcorners1" >
+
+    <div class="grid-container">
+        <div class="Detail" id="currsonginfo">
+           
+
+
+        </div>
+        <div class="Play">
+            
+                    <a href="#" id="audioControl"><img class="img-fluid im invert"
+                            src="https://www.pngarts.com/files/2/Play-Button-PNG-Picture.png" width="30" height="30"></a>
+
+        </div>
+        <div class="Album" id="currsong"></div>
+    </div>
+
+        
+
+
+    </div>
     </div>
 </div>
 </div>
@@ -120,8 +174,8 @@ opacity: .8;
 
 
 <script>
-    let play_button = '<img class="img-fluid invert" src="https://www.pngarts.com/files/2/Play-Button-PNG-Picture.png" width="30" height="30">';
-    let pause_button = '<img class="img-fluid invert" src="https://www.pngarts.com/files/4/Pause-Button-PNG-Free-Download.png" width="30" height="30">'
+    let play_button = '<img class="img im invert" src="https://www.pngarts.com/files/2/Play-Button-PNG-Picture.png" width="30" height="30">';
+    let pause_button = '<img class="img-fluid im invert" src="https://www.pngarts.com/files/4/Pause-Button-PNG-Free-Download.png" width="30" height="30">'
     let yourAudio = document.getElementById('stream'),
         ctrl = document.getElementById('audioControl');
     function do_playpause() {
