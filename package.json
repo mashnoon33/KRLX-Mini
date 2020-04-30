@@ -50,7 +50,7 @@
     "chart.js": "^2.2.1",
     "countup.js": "^1.7.1",
     "dirty-json": "^0.7.0",
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "js-base64": "^2.5.1",
     "json-storage": "^2.1.1",
     "localStorage": "^1.0.3",
