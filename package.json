@@ -55,7 +55,7 @@
     "json-storage": "^2.1.1",
     "localStorage": "^1.0.3",
     "menubar": "^5.1.0",
-    "moment": "^2.17.1",
+    "moment": "^2.29.4",
     "semver": "^5.1.0",
     "sentry": "^0.1.2",
     "superagent": "^3.3.1",
